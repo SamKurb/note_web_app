@@ -14,6 +14,23 @@ public class Model
   // The example code in this class should be replaced by your Model class code.
   // The data should be stored in a suitable data structure.
 
+  Category main = new Category("main"); // Main here is like the master directory of notes
+  static int highest_note_id = 0;
+
+  public Note new_note()
+  {
+    Note note = new Note(highest_note_id);
+    highest_note_id += 1;
+    main.add_note(note);
+    return note;
+  }
+
+  public Note get_note(int ID)
+  {
+    return main.get_note(ID);
+  }
+
+
   public List<String> getPatientNames()
   {
     return readFile("data/patients100.csv");

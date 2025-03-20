@@ -3,6 +3,7 @@ header {
     color: rgba(161,134,241,255);
     padding: 30px;
     text-align: center;
+    font-family: Arial;
 }
 
 header h1
