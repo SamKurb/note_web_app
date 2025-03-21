@@ -15,22 +15,26 @@ import uk.ac.ucl.model.Note;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
-@WebServlet("/index.jsp")
+@WebServlet("/index")
 public class IndexServlet extends HttpServlet
 {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        System.out.println("hello");
         Model model = ModelFactory.getModel();
-        Category category = model.get_index();
+        Category category = model.get_category();
 
-        ArrayList<Category> categories = new ArrayList<>();
-        categories.add(category);
-        System.out.println(categories);
+        ArrayList<Note> notes = category.get_notes_by_title(true);
+        ArrayList<String> titles = new ArrayList<>();
 
-        request.setAttribute("categories", categories);
+        for (Note note : notes)
+        {
+            titles.add(note.get_title());
+        }
+
+        System.out.println(titles);
+        request.setAttribute("notes_"+category.get_name(), notes);
         RequestDispatcher dispatch = request.getRequestDispatcher("/index.jsp");
         dispatch.forward(request, response);
     }
