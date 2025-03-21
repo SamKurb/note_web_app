@@ -25,11 +25,29 @@ public class Model
     return note;
   }
 
+  public Category get_index()
+  {
+    return main;
+  }
+
+  public Note new_note(Category parent_cat)
+  {
+    Note note = new Note(highest_note_id);
+    parent_cat.add_note(note);
+    highest_note_id += 1;
+    main.add_note(note);
+    return note;
+  }
+
   public Note get_note(int ID)
   {
     return main.get_note(ID);
   }
 
+  public boolean note_exists(int ID)
+  {
+    return main.has_note_by_ID(ID);
+  }
 
   public List<String> getPatientNames()
   {

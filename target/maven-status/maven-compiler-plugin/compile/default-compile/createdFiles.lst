@@ -1,10 +1,12 @@
 uk\ac\ucl\model\ModelFactory.class
-uk\ac\ucl\model\Model.class
 uk\ac\ucl\model\Note.class
 uk\ac\ucl\main\Main.class
+uk\ac\ucl\model\Category.class
+uk\ac\ucl\servlets\NewNoteServlet.class
+uk\ac\ucl\model\Model.class
+uk\ac\ucl\servlets\IndexServlet.class
+uk\ac\ucl\model\Index.class
 uk\ac\ucl\servlets\SearchServlet.class
 uk\ac\ucl\servlets\ViewNoteServlet.class
 uk\ac\ucl\model\JsonWriter.class
-uk\ac\ucl\model\Category.class
 uk\ac\ucl\servlets\ViewPatientListServlet.class
-uk\ac\ucl\servlets\NewNoteServlet.class
