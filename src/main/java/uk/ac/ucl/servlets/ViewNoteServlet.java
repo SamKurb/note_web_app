@@ -18,15 +18,30 @@ import java.util.List;
 @WebServlet("/note")
 public class ViewNoteServlet extends HttpServlet
 {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, NumberFormatException
     {
-        int note_ID = Integer.parseInt(request.getParameter("id"));
 
-        Model model = ModelFactory.getModel();
-        Note note = model.get_note(note_ID);
-        request.setAttribute("note", note);
+        try
+        {
+            int note_ID = Integer.parseInt(request.getParameter("id"));
+            Model model = ModelFactory.getModel();
 
-        RequestDispatcher dispatch = request.getRequestDispatcher("/note.jsp");
-        dispatch.forward(request, response);;
+            if (model.note_exists(note_ID))
+            {
+                Note note = model.get_note(note_ID);
+                request.setAttribute("note", note);
+                RequestDispatcher dispatch = request.getRequestDispatcher("/note.jsp");
+                dispatch.forward(request, response);
+                return;
+            }
+        }
+        catch (NumberFormatException e) { }
+        handleNoteNotFound(request, response);
+    }
+
+    private void handleNoteNotFound(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("note_ID", request.getParameter("id"));
+        RequestDispatcher dispatch = request.getRequestDispatcher("/note_doesnt_exist.jsp");
+        dispatch.forward(request, response);
     }
 }

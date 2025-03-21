@@ -1,26 +1,105 @@
-.clearBoth {
+.clearBoth
+{
   clear: both;
   border: aqua;
 }
-  /*body {*/
-  /*  background-color:  rgba(15, 15,15,255);*/
-  /*}*/
-  /*h1 {*/
-  /*  font-family : Calibri;*/
-  /*  color : rgba(161,134,241,255);*/
-  /*  border : 5px rgba(83,70,120,255);*/
-  /*  text-align: center;*/
-  /*  background-color: rgba(15,15,15,255);*/
-  /*}*/
 
-  /*h2 {*/
-  /*  color : rgba(161,134,241,255)*/
-  /*}*/
-  /*a {*/
-  /*  color : rgba(89,75,130,255)*/
-  /*}*/
-/* Sidebar styles */
-/* General body layout */
+p
+{
+  color: white;
+  text-align: center;
+}
+body
+{
+  background-color: rgba(15,15,15,255);
+}
+
+h1
+{
+  font-family: Arial,serif;
+  color: rgba(138,92,245,255);
+}
+
+h2
+{
+  font-family: Arial, serif;
+}
+
+.note
+{
+  font-family: Arial, serif;
+  margin: auto 0;
+}
+
+.note h1
+{
+  color: white;
+  text-align: center;
+  font-size: 32px;
+
+  border-bottom: 3px solid rgba(60,60,60,255);
+}
+
+.note form label
+{
+  font-size: 24px;
+  color: white;
+}
+
+.note form label
+{
+  display: block;
+  text-align: center;
+}
+
+.note form input#note_title {
+  display: block;
+  margin: 0 auto;
+}
+
+.note form input
+{
+  border: 2px white;
+
+  background-color: rgba(60,60,60,255);
+  color: white;
+
+  outline: none;
+
+  font-size: 20px;
+
+  width: 20%;
+  transition: width 0.5s ease-in-out;
+}
+
+.note form input:focus
+{
+  width: 60%;
+  border: 3px solid white;
+}
+
+  /*purple : rgba(161,134,241,255);*/
+  /*black: rgba(15,15,15,255);*/
+  /*otherpurpl: rgba(100,65,200,255;*/
+
+.note form textarea
+{
+  border: 2px solid white;
+  background-color: rgba(25,25,25,255);
+  outline: none;
+
+  width: 30%;
+  height: 200px;
+  resize: none;
+  overflow-y: auto;
+  color: white;
+
+  display: block;
+  margin: 0 auto;
+
+}
+
+
 body
 {
   margin: 0;
@@ -29,37 +108,42 @@ body
 
 #content
 {
-  margin-left: 70px;
+  margin-left: 20px;
   transition: margin-left 0.5s ease-in-out;
 }
 
 #content h2
 {
-  font-family: Arial;
-  color: black;
+  font-family: Arial, serif;
+  color: white;
+  text-align: center;
 }
 
 #content button
 {
-  background-color: black;
+  background-color: rgba(138,92,245,255);
   border: white;
 
   color: white;
-  font-family: Arial;
+  font-family: Arial, serif;
 
   padding: 15px 15px;
   border-radius: 16px;
+
+  display: block;
+  margin: 20px auto;
+
 }
 
 .sidebar
 {
-  top: 115px;
+  top: 116px;
   width: 250px;
   height: 100vh;
-  background: #333;
+  background-color: rgba(25,25,25,255);
   color: white;
   position: fixed;
-  left: -200px;
+  left: -205px;
   transition: left 0.5s ease-in-out;
   z-index: 1000;
 }
@@ -76,14 +160,22 @@ body
 
 .sidebar ul
 {
+  position: relative;
+  bottom: 150px;
   list-style: none;
+
   padding: 0;
+  margin: 0;
 }
 
 .sidebar ul li
 {
-  padding: 15px;
+  padding-bottom: 5px;
+
   text-align: center;
+
+  transition: font-size 0.5s ease-in-out;
+  font-size: 16px;
 }
 
 .sidebar ul li a
@@ -95,49 +187,45 @@ body
 
 .sidebar ul li:hover
 {
-  background: red;
+  background: rgba(138,92,245,255);
+  font-size: 20px;
 }
 
+
+.sidebar .indicator-left p,
 .sidebar .indicator-right p
 {
-  position: absolute;
+  position: relative;
   color: white;
-  font-size: 30px;
-  text-align: left;
-  font-family: Calibri;
-  right: 10px;
-  z-index: 10;
-}
+  left: 215px;
 
-.sidebar:hover .indicator-right p
-{
-  position: absolute;
-  color: #333;
   font-size: 30px;
   text-align: left;
-  font-family: Calibri;
-  right: 10px;
+  font-family: Calibri, serif;
 }
 
 .sidebar .indicator-left p
 {
-  position: absolute;
-  color: #333;
-  font-size: 30px;
-  text-align: left;
-  font-family: Calibri;
-  right: 10px;
-  z-index: 0;
+  bottom: 97px;
+  opacity: 0;
+  z-index: 10;
+}
+
+.sidebar .indicator-right p
+{
+  bottom: 30px;
+}
+
+.sidebar:hover .indicator-right p
+{
+  opacity: 0;
 }
 
 .sidebar:hover .indicator-left p
 {
-  position: absolute;
-  color: white;
-  font-size: 30px;
-  text-align: left;
-  font-family: Calibri;
-  right: 10px;
+  opacity: 1;
   z-index: 1000;
 }
+
+
 
