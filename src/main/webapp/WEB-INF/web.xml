@@ -9,4 +9,9 @@
     MoonShot on the Web
   </description>
 
+
+  <welcome-file-list>
+    <welcome-file>main</welcome-file>
+  </welcome-file-list>
+
 </web-app>

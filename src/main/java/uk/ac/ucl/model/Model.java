@@ -1,85 +1,73 @@
 package uk.ac.ucl.model;
 
-import java.io.Reader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 
-public class Model
+public class Model 
 {
-  // The example code in this class should be replaced by your Model class code.
-  // The data should be stored in a suitable data structure.
+  private NoteManager noteManager;
+  private SearchEngine searchEngine;
+  private NoteSorter noteSorter;
 
-  Category main = new Category("main"); // Main here is like the master directory of notes
-  static int highest_note_id = 0;
+  private static final Index main = new Index("main");
 
-  public Note new_note()
+  public Model()
   {
-    Note note = new Note(highest_note_id);
-    highest_note_id += 1;
-    main.add_note(note);
-    return note;
+    this.noteManager = new NoteManager(main);
+    this.searchEngine = new SearchEngine();
+    this.noteSorter = new NoteSorter();
   }
 
-  public Category get_index()
-  {
-    return main;
+  public Note newNote() {
+    return noteManager.createNote();
   }
 
-  public Note new_note(Category parent_cat)
-  {
-    Note note = new Note(highest_note_id);
-    parent_cat.add_note(note);
-    highest_note_id += 1;
-    main.add_note(note);
-    return note;
+  public Note newNote(Index parentCat) {
+    return noteManager.createNote(parentCat);
   }
 
-  public Note get_note(int ID)
-  {
-    return main.get_note(ID);
-  }
+  public ArrayList<Note> resolveNoteQuery(String searchString, String sortedBy,
+                                          String order, String searchFor, Index category) {
 
-  public boolean note_exists(int ID)
-  {
-    return main.has_note_by_ID(ID);
-  }
+    ArrayList<Note> noteList = category.getNoteList();
 
-  public List<String> getPatientNames()
-  {
-    return readFile("data/patients100.csv");
-  }
-
-  // This method illustrates how to read csv data from a file.
-  // The data files are stored in the root directory of the project (the directory your project is in),
-  // in the directory named data.
-  public List<String> readFile(String fileName)
-  {
-    List<String> data = new ArrayList<>();
-
-    try (Reader reader = new FileReader(fileName);
-         CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT))
-    {
-      for (CSVRecord csvRecord : csvParser)
-      {
-        // The first row of the file contains the column headers, so is not actual data.
-        data.add(csvRecord.get(0));
-      }
-    } catch (IOException e)
-    {
-      e.printStackTrace();
+    if (searchString != null && !searchString.isEmpty()) {
+      noteList = searchEngine.performSearch(noteList, searchString, searchFor);
     }
-    return data;
+
+    boolean ascending = "asc".equals(order);
+    noteSorter.sortNotes(noteList, sortedBy, ascending);
+
+    return noteList;
   }
 
-  // This also returns dummy data. The real version should use the keyword parameter to search
-  // the data and return a list of matching items.
-  public List<String> searchFor(String keyword)
+  public Index getMainCategory() {
+
+    return noteManager.getMainCategory();
+  }
+
+  public Index getCategory()
   {
-    return List.of("Search keyword is: "+ keyword, "result1", "result2", "result3");
+    return noteManager.getMainCategory();
+  }
+
+  public Note getNote(int ID)
+  {
+    return noteManager.getNote(ID);
+  }
+
+  public void updateNote(int ID, String title, String summary, String contents)
+  {
+    noteManager.updateNote(ID, title, summary, contents);
+  }
+
+  public void deleteNote(int ID)
+  {
+    noteManager.deleteNote(ID);
+  }
+
+  public boolean noteExists(int ID)
+  {
+    return noteManager.noteExists(ID);
   }
 }
+

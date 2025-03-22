@@ -52,10 +52,18 @@ h2
   text-align: center;
 }
 
-.note form input#note_title {
+.note form input
+{
   display: block;
   margin: 0 auto;
 }
+
+.note form input#note_summary
+{
+  width: 20%;
+  height: 80px;
+}
+
 
 .note form input
 {
@@ -74,13 +82,30 @@ h2
 
 .note form input:focus
 {
-  width: 60%;
+  width: 40%;
   border: 3px solid white;
 }
 
   /*purple : rgba(161,134,241,255);*/
   /*black: rgba(15,15,15,255);*/
   /*otherpurpl: rgba(100,65,200,255;*/
+
+.note form textarea#note_summary
+{
+  border: 2px solid white;
+  background-color: rgba(25,25,25,255);
+  outline: none;
+
+  width: 20%;
+  height: 60px;
+  resize: none;
+  overflow-y: auto;
+  color: white;
+
+  display: block;
+  margin: 0 auto;
+
+}
 
 .note form textarea
 {
@@ -119,6 +144,37 @@ body
   text-align: center;
 }
 
+.sort_by_txt
+{
+  font-family: Arial, Serif;
+  color: white;
+}
+
+.srch_for_txt
+{
+  font-family: Arial, Serif;
+  color: white;
+}
+
+
+#content h1
+{
+  color: white;
+  text-align: center;
+}
+
+
+#content #index a:hover
+{
+  font-size: 24px;
+}
+
+#content #index p
+{
+  font-family: Arial, Serif;
+  font-size: 24px;
+}
+
 #content button
 {
   background-color: rgba(138,92,245,255);
@@ -128,12 +184,90 @@ body
   font-family: Arial, serif;
 
   padding: 15px 15px;
-  border-radius: 16px;
+  border-radius: 8px;
 
   display: block;
   margin: 20px auto;
 
 }
+
+#content #index table
+{
+  font-family: Arial, serif;
+
+
+
+  margin-left: auto;
+
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 40%;
+
+  text-align: left;
+  background-color: rgba(30,30,30,255);
+  color: white;
+}
+
+#content #index table tr:nth-child(even)
+{
+  background-color: rgba(50,50,50,255);
+}
+
+#content #index table tr:hover
+{
+  background-color: rgba(15,15,15,255);
+}
+
+#content #index table a
+{
+  font-family: Arial, serif;
+  font-size: 16px;
+  color: white;
+
+  transition: font-size 0.2s ease-in-out;
+
+  text-decoration: none;
+}
+
+#search
+{
+  display: flex;
+  justify-content: center;
+
+  font-family: Arial, serif;
+}
+
+#search form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+#search form button {
+  margin-left: auto;
+
+  background-color: rgba(138,92,245,255);
+  border: white;
+
+  color: white;
+  font-family: Arial, serif;
+
+  font-size: 12px;
+
+  padding: 3px 20px;
+  border-radius: 4px;
+
+  display: block;
+  margin: 20px auto;
+}
+
+
 
 .sidebar
 {

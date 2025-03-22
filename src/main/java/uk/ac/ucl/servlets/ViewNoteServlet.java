@@ -26,9 +26,9 @@ public class ViewNoteServlet extends HttpServlet
             int note_ID = Integer.parseInt(request.getParameter("id"));
             Model model = ModelFactory.getModel();
 
-            if (model.note_exists(note_ID))
+            if (model.noteExists(note_ID))
             {
-                Note note = model.get_note(note_ID);
+                Note note = model.getNote(note_ID);
                 request.setAttribute("note", note);
                 RequestDispatcher dispatch = request.getRequestDispatcher("/note.jsp");
                 dispatch.forward(request, response);

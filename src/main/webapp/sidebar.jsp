@@ -18,8 +18,7 @@
   </div>
 
   <ul>
-    <li><a href="index.jsp">Home</a></li>
-    <li><a href="dummypage.html">test2</a></li>
+    <li><a href="main">Home</a></li>
   </ul>
 </div>
 </body>

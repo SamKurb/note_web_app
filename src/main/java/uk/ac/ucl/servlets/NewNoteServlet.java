@@ -21,10 +21,10 @@ public class NewNoteServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Model model = ModelFactory.getModel();
-        Note note = model.new_note();
+        Note note = model.newNote();
 
         request.setAttribute("note", note);
 
-        response.sendRedirect(request.getContextPath() + "note?id=" + note.get_ID());
+        response.sendRedirect(request.getContextPath() + "note?id=" + note.getID());
     }
 }
