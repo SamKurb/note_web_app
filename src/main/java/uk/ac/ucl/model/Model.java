@@ -1,28 +1,46 @@
 package uk.ac.ucl.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Model 
 {
+  private IndexManager indexManager;
   private NoteManager noteManager;
+
   private SearchEngine searchEngine;
   private NoteSorter noteSorter;
 
-  private static final Index main = new Index("main");
+  private static final Index main = new Index("main", 0);
 
   public Model()
   {
-    this.noteManager = new NoteManager(main);
+    this.indexManager = new IndexManager();
+    this.noteManager = new NoteManager(indexManager);
     this.searchEngine = new SearchEngine();
     this.noteSorter = new NoteSorter();
   }
 
-  public Note newNote() {
-    return noteManager.createNote();
+  public void saveAllData()
+  {
+    JsonDataSaver saver = new JsonDataSaver(indexManager, noteManager);
+    saver.saveData();
   }
 
-  public Note newNote(Index parentCat) {
-    return noteManager.createNote(parentCat);
+  public Index getIndexByID(int ID)
+  {
+    return indexManager.getIndexByID(ID);
+  }
+
+  public Index getMainIndex()
+  {
+    return indexManager.getMainIndex();
+  }
+
+
+  public Note newNote(int categoryID)
+  {
+    return noteManager.createNote(categoryID);
   }
 
   public ArrayList<Note> resolveNoteQuery(String searchString, String sortedBy,
@@ -40,24 +58,14 @@ public class Model
     return noteList;
   }
 
-  public Index getMainCategory() {
-
-    return noteManager.getMainCategory();
-  }
-
-  public Index getCategory()
-  {
-    return noteManager.getMainCategory();
-  }
-
   public Note getNote(int ID)
   {
-    return noteManager.getNote(ID);
+    return noteManager.getNoteById(ID);
   }
 
-  public void updateNote(int ID, String title, String summary, String contents)
+  public boolean updateNote(int ID, String title, String summary, String contents, Integer categoryID)
   {
-    noteManager.updateNote(ID, title, summary, contents);
+    return noteManager.updateNote(ID, title, summary, contents, categoryID);
   }
 
   public void deleteNote(int ID)
@@ -69,5 +77,6 @@ public class Model
   {
     return noteManager.noteExists(ID);
   }
+
 }
 

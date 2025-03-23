@@ -5,36 +5,53 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Index {
+public class Index
+{
     private String name;
+    private int ID;
 
-    private Index parentIndex;
-    private ArrayList<Index> childIndices;
+
+    private int parentIndexID;
+    private ArrayList<Integer> childIndexIDs;
 
     private ArrayList<Note> noteList; // All the notes belonging to an index
     private Map<Integer, Note> noteMap; // For fast lookup of notes by ID
 
 
-    public Index(String name)
+
+    public Index(String name, int ID)
     {
         this.name = name;
+        this.ID = ID;
 
-        this.parentIndex = null;
-        this.childIndices = new ArrayList<>();
+        this.parentIndexID = -1; // -1 = no parent
+        this.childIndexIDs = new ArrayList<>();
 
         this.noteList = new ArrayList<>();
         this.noteMap = new HashMap<>();
     }
 
-
-    public Index getParent()
+    public int getID()
     {
-        return parentIndex;
+        return ID;
     }
 
-    public void addNote(Note note) {
+    public int getParentID()
+    {
+        return parentIndexID;
+    }
+
+    public void setParentID(int parentID)
+    {
+        this.parentIndexID = parentID;
+    }
+
+
+    public void addNote(Note note){
         noteList.add(note);
         noteMap.put(note.getID(), note);
+
+        note.addCategory(this.getID());
     }
 
 
@@ -52,45 +69,40 @@ public class Index {
     }
 
 
-    public void removeSubIndex(Index child)
+    public void addSubIndex(int childID)
     {
-        childIndices.remove(child);
-    }
-
-
-    public void addSubIndex(String name)
-    {
-        Index child = new Index(name);
-        childIndices.add(child);
-    }
-
-    private void addSubIndex(Index child) {
-        child.setParent(this);
-        childIndices.add(child);
-    }
-
-    public void setParent(Index newParent)
-    {
-        if (name.equals("main")) {
-            return;
-        }
-
-        if (childIndices.contains(newParent)) {
-            return;
-        }
-
-        if (parentIndex != null)
+        if (!childIndexIDs.contains(childID))
         {
-            parentIndex.removeSubIndex(this);
+            childIndexIDs.add(childID);
         }
-
-        parentIndex = newParent;
-        newParent.addSubIndex(this);
     }
 
-    public boolean hasNoteWithId(int ID)
+    public void removeSubIndex(int childId)
+    {
+        childIndexIDs.remove(Integer.valueOf(childId));
+    }
+
+
+
+    public boolean hasNoteWithID(int ID)
     {
         return noteMap.containsKey(ID);
+    }
+
+    public boolean hasNoteWithTitle(int IDbeingCompared, String titleBeingCompared)
+    {
+        for (Note note : noteList)
+        {
+            String currTitle = note.getTitle();
+            int currID = note.getID();
+            if (currTitle.equals(titleBeingCompared) && IDbeingCompared != currID)
+            {
+                System.out.println("wut");
+                return true;
+            }
+        }
+        System.out.println("wut");
+        return false;
     }
 
     /**
@@ -108,7 +120,8 @@ public class Index {
     }
 
 
-    public ArrayList<Note> getNoteList() {
+    public ArrayList<Note> getNoteList()
+    {
         return cloneNoteList();
     }
 
@@ -121,7 +134,8 @@ public class Index {
      * Returns the list of child indices.
      * This should probably return a defensive copy like getNoteList() does.
      */
-    public ArrayList<Index> getChildIndices() {
-        return new ArrayList<>(childIndices);
+    public ArrayList<Integer> getChildIndices()
+    {
+        return new ArrayList<>(childIndexIDs);
     }
 }

@@ -11,7 +11,7 @@
     <div class = "note">
         <h1>Note Editor</h1>
 
-        <form action="save-note" method="post">
+        <form action="/save-note" method="POST">
             <label for="note_title">Title</label>
             <input type="hidden" name="note_ID" value="${note.getID()}">
             <input type="text" id="note_title" name="note_title" value="${note.getTitle()}" required><br><br>
@@ -24,6 +24,14 @@
 
             <textarea id="note_content" name="note_content"
                       required>${note.getContents()}</textarea>
+
+            <% if (request.getAttribute("error_message") != null)
+            { %>
+            <div id="error_msg">
+                <%= request.getAttribute("error_message") %>
+            </div>
+            <% } %>
+
 
             <button type="submit">Save Note</button>
         </form>

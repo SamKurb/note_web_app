@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import uk.ac.ucl.model.Index;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 
@@ -25,8 +26,16 @@ public class SaveNoteServlet extends HttpServlet
         String note_summary = request.getParameter("note_summary");
         String note_content = request.getParameter("note_content");
 
-        model.updateNote(note_ID, note_title, note_summary, note_content);
+        Index currentIndex = (Index) request.getSession().getAttribute("current_category");
 
-        response.sendRedirect("/note?id=" + note_ID);
+        boolean succeeded = model.updateNote(note_ID, note_title, note_summary, note_content, currentIndex.getID());
+        if (succeeded)
+        {
+            response.sendRedirect("/note?id=" + note_ID);
+        }
+        else
+        {
+            response.sendRedirect(request.getContextPath() + "/note?id=" + note_ID + "&error=duplicate");
+        }
     }
 }

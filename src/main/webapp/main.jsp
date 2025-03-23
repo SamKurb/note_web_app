@@ -17,6 +17,9 @@
     <form action = "create-note" method = "POST">
         <button type = "submit"> Create a new note </button>
     </form>
+    <form action = "save-all" method = "POST">
+        <button type = "submit"> Save all notes </button>
+    </form>
 
     <div id="search">
         <form action="index-search" method="GET">
@@ -44,12 +47,13 @@
         <table>
             <tr>
                 <th>Note name</th>
+                <th>Note indices</th>
+                <th>Note ID (higher = newer)</th>
             </tr>
             <%
                 if (request.getAttribute("notes") != null)
                 {
                     ArrayList<Note> notes = (ArrayList<Note>) request.getAttribute("notes");
-
                     for (Note note : notes)
                     {
                     %>
@@ -57,6 +61,10 @@
                         <td>
                             <a href="note?id=<%= note.getID() %>" title="<%=note.getSummary() %>"> <%= note.getTitle() %> </a>
                         </td>
+                        <td>
+                            <%= note.getFormattedCategoryNames()%>
+                        </td>
+                        <td> <%= note.getID()%> </td>
                     </tr>
                     <%
 

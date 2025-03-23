@@ -1,7 +1,6 @@
 package uk.ac.ucl.servlets;
 
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,23 +10,18 @@ import uk.ac.ucl.model.Index;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.Note;
-
-
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
-@WebServlet("/create-note")
-public class NewNoteServlet extends HttpServlet
+@WebServlet("/save-all")
+public class SaveDataServlet extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Model model = ModelFactory.getModel();
 
-        Index current_category = (Index) request.getSession().getAttribute("current_category");
-        Note note = model.newNote(current_category.getID());
+        model.saveAllData();
 
-        request.setAttribute("note", note);
-
-        response.sendRedirect(request.getContextPath() + "note?id=" + note.getID());
+        response.sendRedirect("/main");
     }
 }

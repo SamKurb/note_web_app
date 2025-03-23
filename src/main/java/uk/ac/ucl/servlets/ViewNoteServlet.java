@@ -26,6 +26,11 @@ public class ViewNoteServlet extends HttpServlet
             int note_ID = Integer.parseInt(request.getParameter("id"));
             Model model = ModelFactory.getModel();
 
+            if (request.getParameter("error") != null  && request.getParameter("error").equals("duplicate"))
+            {
+                request.setAttribute("error_message", "Note title cannot be the same as other notes within the same index");
+            }
+
             if (model.noteExists(note_ID))
             {
                 Note note = model.getNote(note_ID);
@@ -37,6 +42,7 @@ public class ViewNoteServlet extends HttpServlet
         }
         catch (NumberFormatException e) { }
         handleNoteNotFound(request, response);
+
     }
 
     private void handleNoteNotFound(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
