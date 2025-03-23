@@ -23,7 +23,7 @@
             <label for="note_content">Content</label><br>
 
             <textarea id="note_content" name="note_content"
-                      required>${note.getContents()}</textarea>
+                      required>${note.getTextContents()}</textarea>
 
             <% if (request.getAttribute("error_message") != null)
             { %>

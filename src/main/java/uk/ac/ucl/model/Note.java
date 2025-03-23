@@ -28,7 +28,7 @@ public class Note implements Cloneable
         this.title = "note with id: " + this.ID;
 
         this.contents = new ArrayList<>();
-        this.contents.add(new TextElement(0, ""));
+
         this.latestElementID = 0;
         this.summary = "";
 
@@ -58,6 +58,11 @@ public class Note implements Cloneable
     {
         contents.add(element);
         updateModifiedTime();
+    }
+
+    void setContents(ArrayList<NoteElement> contents)
+    {
+        this.contents = contents;
     }
 
     boolean removeContentElement(int elementID)
@@ -121,7 +126,6 @@ public class Note implements Cloneable
         StringBuilder builder = new StringBuilder();
         for (NoteElement element : contents)
         {
-
             builder.append(element.render());
         }
         return builder.toString();

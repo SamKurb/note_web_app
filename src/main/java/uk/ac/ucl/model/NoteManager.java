@@ -10,6 +10,8 @@ public class NoteManager
     private Map<Integer, Note> allNotes; // Central repository of all notes
     private static int highestNoteId = 0;
 
+    private int latestElementID = 0;
+
     public NoteManager(IndexManager indexManager)
     {
         this.indexManager = indexManager;
@@ -25,6 +27,28 @@ public class NoteManager
     {
         // Create in main index by default
         return createNote(indexManager.getMainIndex().getID());
+    }
+
+    public Note createNote(int categoryID)
+    {
+        Index category = indexManager.getIndexByID(categoryID);
+
+        if (category == null)
+        {
+            category = indexManager.getMainIndex();
+            categoryID = category.getID();
+        }
+
+        Note note = new Note(highestNoteId);
+        highestNoteId++;
+
+        TextElement initialContent = new TextElement(highestNoteId++, "");
+        note.addElement(initialContent);
+
+        allNotes.put(note.getID(), note);
+
+        addNoteToCategory(note.getID(), categoryID);
+        return note;
     }
 
     public void addNoteToCategory(int noteId, int categoryId) {
@@ -70,25 +94,6 @@ public class NoteManager
         }
     }
 
-    public Note createNote(int categoryID)
-    {
-        Index category = indexManager.getIndexByID(categoryID);
-
-        if (category == null)
-        {
-            category = indexManager.getMainIndex();
-            categoryID = category.getID();
-        }
-
-        Note note = new Note(highestNoteId);
-        highestNoteId++;
-
-        allNotes.put(note.getID(), note);
-
-        addNoteToCategory(note.getID(), categoryID);
-        return note;
-    }
-
 
 
     public Note getNoteById(int ID)
@@ -100,7 +105,7 @@ public class NoteManager
      * Updates a note, returns true if successfully updated (no other note had the same title)
      * or false otherwise.
      */
-    public boolean updateNote(int id, String title, String summary, String contents, Integer currentIndexID)
+    public boolean updateNote(int id, String title, String summary, String textContents, Integer currentIndexID)
     {
         Note note = getNoteById(id);
 
@@ -111,11 +116,10 @@ public class NoteManager
             return false;
         }
 
-        if (note != null)
-        {
+        if (note != null) {
             note.setTitle(title);
             note.setSummary(summary);
-            note.setContents(contents);
+            note.setTextContents(textContents); // This will update or create the text element
             note.updateModifiedTime();
         }
         return true;
@@ -146,31 +150,25 @@ public class NoteManager
         Note note = getNoteById(noteId);
         if (note == null) return;
 
-        // If empty list provided, use default category
         if (newCategoryIds == null || newCategoryIds.isEmpty())
         {
             newCategoryIds = new ArrayList<>();
             newCategoryIds.add(indexManager.getMainIndex().getID());
         }
 
-        // Get current categories
         ArrayList<Integer> currentCategories = note.getCategoryIDs();
 
-        // Remove from old categories
         removeFromOldCategories(note, currentCategories, newCategoryIds);
 
-        // Add to new categories
         addToNewCategories(note, currentCategories, newCategoryIds);
 
-        // Ensure note has at least one category
         ensureNoteHasCategory(note);
 
-        // Update category names for display
         updateNoteCategoryNames(note);
     }
 
     /**
-     * Removes note from categories that are no longer in the list.
+     * Removes note from categories that are not in the new list
      */
     private void removeFromOldCategories(Note note, ArrayList<Integer> currentCategories,
                                          ArrayList<Integer> newCategoryIds)
@@ -184,7 +182,7 @@ public class NoteManager
     }
 
     /**
-     * Adds note to new categories that weren't in the original list.
+     * Adds note to new categories that weren't in the original list
      */
     private void addToNewCategories(Note note, ArrayList<Integer> currentCategories,
                                     ArrayList<Integer> newCategoryIds)
@@ -198,9 +196,6 @@ public class NoteManager
         }
     }
 
-    /**
-     * Ensures a note always belongs to at least one category.
-     */
     private void ensureNoteHasCategory(Note note)
     {
         if (note.getCategoryIDs().isEmpty())

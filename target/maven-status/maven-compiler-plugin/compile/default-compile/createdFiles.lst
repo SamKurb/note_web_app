@@ -1,8 +1,11 @@
 uk\ac\ucl\model\ModelFactory.class
+uk\ac\ucl\model\NoteElement.class
 uk\ac\ucl\model\Note.class
 uk\ac\ucl\main\Main.class
+uk\ac\ucl\model\HyperLinkElement.class
 uk\ac\ucl\model\NoteSorter.class
 uk\ac\ucl\model\SearchEngine.class
+uk\ac\ucl\model\ImageElement.class
 uk\ac\ucl\servlets\IndexSearchServlet.class
 uk\ac\ucl\servlets\SaveDataServlet.class
 uk\ac\ucl\model\NoteManager.class
@@ -10,6 +13,7 @@ uk\ac\ucl\model\StringComparer.class
 uk\ac\ucl\servlets\NewNoteServlet.class
 uk\ac\ucl\model\IndexManager.class
 uk\ac\ucl\model\Model.class
+uk\ac\ucl\model\TextElement.class
 uk\ac\ucl\model\Index.class
 uk\ac\ucl\servlets\ViewNoteServlet.class
 uk\ac\ucl\servlets\DeleteNoteServlet.class

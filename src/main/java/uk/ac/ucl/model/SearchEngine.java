@@ -36,6 +36,6 @@ public class SearchEngine
     private String getContentToSearch(Note note, String searchTarget)
     {
         return searchTarget.equals("title") ?
-                note.getTitle().toLowerCase() : note.getContents().toLowerCase();
+                note.getTitle().toLowerCase() : note.getTextContents().toLowerCase();
     }
 }
