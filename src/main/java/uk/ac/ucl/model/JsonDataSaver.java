@@ -10,7 +10,6 @@ import java.util.Map;
 public class JsonDataSaver
 {
 
-
     private IndexManager indexManager;
     private NoteManager noteManager;
 

@@ -1,3 +1,5 @@
+
+<%@ page import="java.util.ArrayList" %>
 <%@ include file="header.jsp" %>
 <html>
 <head>
@@ -7,9 +9,57 @@
 <body>
 <%@ include file="sidebar.jsp" %>
 
+
+
 <div id="content">
     <div class = "note">
         <h1>Note Editor</h1>
+
+        <div class="mode-toggle">
+            <%
+                String mode = request.getParameter("mode");
+                if (mode != null && mode.equals("view"))
+                {
+            %>
+            <form action="/toggle-view-mode" method="POST">
+                <input type="hidden" name="mode" value="edit">
+                <input type="hidden" name="noteId" value="${note.getID()}">
+                <button type="submit">Edit</button>
+            </form>
+            <%
+            }
+            else
+            {
+            %>
+            <form action="/toggle-view-mode" method="POST">
+                <input type="hidden" name="noteId" value="${note.getID()}">
+                <input type="hidden" name="mode" value="view">
+                <button type="submit">View</button>
+            </form>
+            <%
+                }
+            %>
+        </div>
+        <% if (request.getParameter("mode") != null && request.getParameter("mode").equals("view")) { %>
+
+        <h2>${note.getTitle()}</h2>
+        <div class="summary-section">
+            <h3>Summary</h3>
+            <div class="summary-content">${note.getSummary()}</div>
+        </div>
+
+        <div class="content-section">
+            <h3>Rendered Content</h3>
+            <div class="markdown-content">
+                <%= request.getAttribute("renderedContent") %>
+            </div>
+        </div>
+        <%
+        }
+        else
+        {
+        %>
+
 
         <form action="/save-note" method="POST">
             <label for="note_title">Title</label>
@@ -31,7 +81,7 @@
                 <%= request.getAttribute("error_message") %>
             </div>
             <% } %>
-
+        <% } %>
 
             <button type="submit">Save Note</button>
         </form>

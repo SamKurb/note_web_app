@@ -4,19 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Manages the creation, retrieval, and relationships of Index objects.
- * Ensures there is only one root index (main).
- */
+
 public class IndexManager {
     private Map<Integer, Index> indexMap; // Map of all indices by ID for fast access
     private Index mainIndex; // Root index
 
     private static int highestIndexID = 0;
 
-    /**
-     * Creates a new IndexManager with a main index.
-     */
+
     public IndexManager()
     {
         this.indexMap = new HashMap<>();
@@ -25,30 +20,22 @@ public class IndexManager {
         indexMap.put(mainIndex.getID(), mainIndex);
     }
 
-    /**
-     * Gets the root/main index.
-     */
     public Index getMainIndex()
     {
         return mainIndex;
     }
 
-    /**
-     * Gets an index by its ID.
-     */
-    public Index getIndexByID(int id) {
+    public Index getIndexByID(int id)
+    {
         return indexMap.get(id);
     }
 
-    /**
-     * Creates a new index with the given name and parent.
-     * Returns the new index.
-     */
+
     public Index createIndex(String name, int parentID)
     {
         // Create the new index
-        Index newIndex = new Index(name, highestIndexID);
-        highestIndexID++;
+        Index newIndex = new Index(name, ++highestIndexID);
+        newIndex.setParentID(parentID);
 
         // Get the parent index (use main if parent doesn't exist)
         Index parent = getIndexByID(parentID);
@@ -69,6 +56,11 @@ public class IndexManager {
     public int getHighestIndexID()
     {
         return highestIndexID;
+    }
+
+    public void setHighestIndexID(int ID)
+    {
+        highestIndexID = ID;
     }
 
     /**
@@ -171,17 +163,11 @@ public class IndexManager {
         return false;
     }
 
-    /**
-     * Gets all indices.
-     */
     public ArrayList<Index> getAllIndices()
     {
         return new ArrayList<>(indexMap.values());
     }
 
-    /**
-     * Gets the number of indices.
-     */
     public int getIndexCount()
     {
         return indexMap.size();
@@ -207,5 +193,18 @@ public class IndexManager {
         }
 
         return children;
+    }
+
+    public void setMainIndex(Index index) {
+        this.mainIndex = index;
+    }
+
+    public void addLoadedIndex(Index index)
+    {
+        indexMap.put(index.getID(), index);
+        if (index.isMain())
+        {
+            mainIndex = index;
+        }
     }
 }

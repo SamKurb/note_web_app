@@ -1,12 +1,17 @@
 package uk.ac.ucl.model;
 
-import org.w3c.dom.Text;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Note implements Cloneable
 {
     private String title;
+
+    @JsonProperty("id")
     private final int ID;
 
     private ArrayList<NoteElement> contents;
@@ -22,6 +27,12 @@ public class Note implements Cloneable
     private ArrayList<Integer> categoryIDs;
     private transient ArrayList<String> categoryNames;
 
+    public Note()
+    {
+        this(-1);
+    }
+
+    @JsonCreator
     public Note(int ID)
     {
         this.ID = ID;
@@ -29,7 +40,6 @@ public class Note implements Cloneable
 
         this.contents = new ArrayList<>();
 
-        this.latestElementID = 0;
         this.summary = "";
 
         this.categoryIDs = new ArrayList<>();
@@ -39,16 +49,19 @@ public class Note implements Cloneable
         this.modifiedId = modifiedTracker;
     }
 
+    @JsonProperty("title")
     public String getTitle()
     {
         return title;
     }
 
+    @JsonProperty("title")
     public void setTitle(String newTitle)
     {
         title = newTitle;
     }
 
+    @JsonProperty("contents")
     ArrayList<NoteElement> getContents()
     {
         return new ArrayList<>(contents);
@@ -60,6 +73,7 @@ public class Note implements Cloneable
         updateModifiedTime();
     }
 
+    @JsonProperty("contents")
     void setContents(ArrayList<NoteElement> contents)
     {
         this.contents = contents;
@@ -95,6 +109,7 @@ public class Note implements Cloneable
         return null;
     }
 
+    @JsonProperty("textContents")
     public String getTextContents()
     {
         for (NoteElement element : contents) {
@@ -131,28 +146,32 @@ public class Note implements Cloneable
         return builder.toString();
     }
 
-
+    @JsonProperty("summary")
     public String getSummary()
     {
         return summary;
     }
 
+    @JsonProperty("summary")
     public void setSummary(String newSummary)
     {
         summary = newSummary;
     }
 
+    @JsonProperty("modifiedId")
     public void updateModifiedTime()
     {
         modifiedTracker += 1;
         this.modifiedId = modifiedTracker;
     }
 
+    @JsonProperty("modifiedId")
     public int getModifiedTime()
     {
         return modifiedId;
     }
 
+    @JsonProperty("id")
     public int getID()
     {
         return ID;
@@ -163,6 +182,7 @@ public class Note implements Cloneable
         return categoryNames;
     }
 
+    @JsonIgnore
     public String getFormattedCategoryNames()
     {
         System.out.println(categoryNames);
@@ -175,11 +195,13 @@ public class Note implements Cloneable
         this.categoryNames = names;
     }
 
+    @JsonProperty("categoryIDs")
     public ArrayList<Integer> getCategoryIDs()
     {
         return new ArrayList<>(categoryIDs);
     }
 
+    @JsonProperty("categoryIDs")
     public void setCategoryIDs(ArrayList<Integer> categoryIDs)
     {
         this.categoryIDs = categoryIDs;

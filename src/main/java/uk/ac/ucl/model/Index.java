@@ -1,20 +1,27 @@
 package uk.ac.ucl.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 public class Index
 {
     private String name;
     private int ID;
 
-
+    @JsonProperty("parentId")
     private int parentIndexID;
+
+    @JsonProperty("childIndices")
     private ArrayList<Integer> childIndexIDs;
 
+    @JsonIgnore
     private ArrayList<Note> noteList; // All the notes belonging to an index
+
+    @JsonIgnore
     private Map<Integer, Note> noteMap; // For fast lookup of notes by ID
 
 
@@ -31,11 +38,13 @@ public class Index
         this.noteMap = new HashMap<>();
     }
 
+    @JsonProperty("id")
     public int getID()
     {
         return ID;
     }
 
+    @JsonProperty("parentId")
     public int getParentID()
     {
         return parentIndexID;
@@ -68,6 +77,10 @@ public class Index
         noteList.remove(note);
     }
 
+    public boolean isMain()
+    {
+        return ID == 0;
+    }
 
     public void addSubIndex(int childID)
     {
@@ -134,8 +147,24 @@ public class Index
      * Returns the list of child indices.
      * This should probably return a defensive copy like getNoteList() does.
      */
+    @JsonProperty("childIndices")
     public ArrayList<Integer> getChildIndices()
     {
         return new ArrayList<>(childIndexIDs);
+    }
+
+    @JsonProperty("id")
+    public void setID(int id) {
+        this.ID = id;
+    }
+
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("childIndices")
+    public void setChildIndices(ArrayList<Integer> childIndices) {
+        this.childIndexIDs = new ArrayList<>(childIndices);
     }
 }

@@ -23,6 +23,11 @@ public class NoteManager
         return highestNoteId;
     }
 
+    public void setHighestNoteId(int ID)
+    {
+        highestNoteId = ID;
+    }
+
     public Note createNote()
     {
         // Create in main index by default
@@ -42,7 +47,7 @@ public class NoteManager
         Note note = new Note(highestNoteId);
         highestNoteId++;
 
-        TextElement initialContent = new TextElement(highestNoteId++, "");
+        TextElement initialContent = new TextElement(latestElementID++, "");
         note.addElement(initialContent);
 
         allNotes.put(note.getID(), note);
@@ -218,6 +223,25 @@ public class NoteManager
             return category.getNoteList();
         }
         return new ArrayList<>();
+    }
+
+
+    public boolean removeLinkFromNote(int noteID, int linkID)
+    {
+        Note note = getNoteById(noteID);
+        if (note == null) return false;
+
+        boolean removed = note.removeContentElement(linkID);
+        if (removed)
+        {
+            note.updateModifiedTime();
+        }
+        return removed;
+    }
+
+    public void addLoadedNote(Note note)
+    {
+        allNotes.put(note.getID(), note);
     }
 
 }

@@ -1,163 +1,48 @@
-.clearBoth
-{
+/* ==== GENERAL STYLES ==== */
+.clearBoth {
   clear: both;
   border: aqua;
 }
 
-p
-{
+p {
   color: white;
   text-align: center;
 }
-body
-{
+
+body {
   background-color: rgba(15,15,15,255);
-}
-
-h1
-{
-  font-family: Arial,serif;
-  color: rgba(138,92,245,255);
-}
-
-h2
-{
-  font-family: Arial, serif;
-}
-
-.note
-{
-  font-family: Arial, serif;
-  margin: auto 0;
-}
-
-.note h1
-{
-  color: white;
-  text-align: center;
-  font-size: 32px;
-
-  border-bottom: 3px solid rgba(60,60,60,255);
-}
-
-.note form label
-{
-  font-size: 24px;
-  color: white;
-}
-
-.note form label
-{
-  display: block;
-  text-align: center;
-}
-
-.note form input
-{
-  display: block;
-  margin: 0 auto;
-}
-
-.note form input#note_summary
-{
-  width: 20%;
-  height: 80px;
-}
-
-
-.note form input
-{
-  border: 2px white;
-
-  background-color: rgba(60,60,60,255);
-  color: white;
-
-  outline: none;
-
-  font-size: 20px;
-
-  width: 20%;
-  transition: width 0.5s ease-in-out;
-}
-
-.note form input:focus
-{
-  width: 40%;
-  border: 3px solid white;
-}
-
-  /*purple : rgba(161,134,241,255);*/
-  /*black: rgba(15,15,15,255);*/
-  /*otherpurpl: rgba(100,65,200,255;*/
-
-.note form textarea#note_summary
-{
-  border: 2px solid white;
-  background-color: rgba(25,25,25,255);
-  outline: none;
-
-  width: 20%;
-  height: 60px;
-  resize: none;
-  overflow-y: auto;
-  color: white;
-
-  display: block;
-  margin: 0 auto;
-
-}
-
-.note form textarea
-{
-  border: 2px solid white;
-  background-color: rgba(25,25,25,255);
-  outline: none;
-
-  width: 30%;
-  height: 200px;
-  resize: none;
-  overflow-y: auto;
-  color: white;
-
-  display: block;
-  margin: 0 auto;
-
-}
-
-
-body
-{
   margin: 0;
   padding: 0;
 }
 
-#content
-{
-  margin-left: 20px;
-  transition: margin-left 0.5s ease-in-out;
+/* ==== TYPOGRAPHY ==== */
+h1 {
+  font-family: Arial, serif;
+  color: rgba(138,92,245,255);
 }
 
-#content h2
-{
+h2 {
+  font-family: Arial, serif;
+}
+
+#content h2,
+#content h1 {
   font-family: Arial, serif;
   color: white;
   text-align: center;
 }
 
-.sort_by_txt
-{
+.sort_by_txt {
   font-family: Arial, Serif;
   color: white;
 }
 
-.srch_for_txt
-{
+.srch_for_txt {
   font-family: Arial, Serif;
   color: white;
 }
 
-#error_msg
-{
+#error_msg {
   padding-top: 12px;
   font-family: Arial, Serif;
   text-align: center;
@@ -165,120 +50,376 @@ body
   font-size: 16px;
 }
 
-#content h1
-{
+/* ==== LAYOUT CONTAINERS ==== */
+#content {
+  margin-left: 20px;
+  transition: margin-left 0.5s ease-in-out;
+}
+
+/* Two-column layout for tables */
+.table-container {
+  display: flex;
+  width: 1200px;
+  margin: 20px auto;
+  gap: 60px; /* Increased gap between indices and notes */
+  justify-content: flex-start; /* Changed to align from start */
+  padding-left: 100px; /* Add padding to shift everything right */
+}
+.left-column {
+  width: 200px; /* Fixed narrow width for indices */
+}
+
+.right-column {
+  width: 700px; /* Fixed width for notes section */
+}
+
+/* Search rows for separate lines */
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* ==== NAVIGATION ELEMENTS ==== */
+#breadcrumb_nav {
+  margin: 10px 0;
   color: white;
+  font-family: Arial, serif;
   text-align: center;
 }
 
-
-#content #index a:hover
-{
-  font-size: 24px;
-}
-
-#content #index p
-{
-  font-family: Arial, Serif;
-  font-size: 24px;
-}
-
-#content button
-{
-  background-color: rgba(138,92,245,255);
-  border: white;
-
-  color: white;
+#breadcrumb_nav a {
   font-family: Arial, serif;
-
-  padding: 15px 15px;
-  border-radius: 8px;
-
-  display: block;
-  margin: 20px auto;
-
+  color: rgba(138,92,245,255);
+  text-decoration: none;
+  margin: 0 5px;
 }
 
-#content #index table
-{
-  font-family: Arial, serif;
-
-
-
-  margin-left: auto;
-
-  padding-top: 12px;
-  padding-bottom: 12px;
-
-  margin-left: auto;
-  margin-right: auto;
-
-  width: 40%;
-
-  text-align: left;
-  background-color: rgba(30,30,30,255);
-  color: white;
+#breadcrumb_nav a:hover {
+  text-decoration: underline;
 }
 
-#content #index table tr:nth-child(even)
-{
-  background-color: rgba(50,50,50,255);
+#navigate_parent {
+  margin: 10px 0;
+  text-align: center;
 }
 
-#content #index table tr:hover
-{
-  background-color: rgba(15,15,15,255);
-}
-
-#content #index table a
-{
-  font-family: Arial, serif;
-  font-size: 16px;
-  color: white;
-
-  transition: font-size 0.2s ease-in-out;
-
+#navigate_parent a {
+  color: rgba(138,92,245,255);
   text-decoration: none;
 }
 
-#search
-{
+/* ==== INDEX/CATEGORY NAVIGATION ==== */
+
+#navigate_indices table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(30,30,30,255);
+  color: white;
+  font-size: 14px; /* Smaller font for indices */
+  margin-bottom: 80px;
+  font-family: Arial, serif;
+}
+
+
+#navigate_indices {
+  margin-top: 42px;  /* Align with notes table, adjust as needed */
+}
+
+#navigate_indices th {
+  font-family: Arial, serif;
+  background-color: rgba(50,50,50,255);
+  padding: 8px;
+  text-align: left;
+  border-bottom: 2px solid rgba(60,60,60,255);
+}
+
+#navigate_indices td {
+  padding: 6px 8px;
+}
+#navigate_indices a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+#navigate_indices a:hover {
+  color: rgba(138,92,245,255);
+}
+
+/* ==== BUTTONS STYLING ==== */
+#content button {
+  background-color: rgba(138,92,245,255);
+  border: white;
+  color: white;
+  font-family: Arial, serif;
+  padding: 15px 15px;
+  border-radius: 8px;
+  display: block;
+  margin: 20px auto;
+}
+
+.mode-toggle button {
+  background-color: rgba(138,92,245,255);
+  border: white;
+  width: 5%;
+  color: white;
+  font-family: Arial, serif;
+  padding: 15px 15px;
+  border-radius: 4px;
+  display: block;
+  margin: 20px auto;
+}
+
+/* ==== FORMS STYLING ==== */
+#content #add_index {
   display: flex;
   justify-content: center;
+  margin: 20px auto;
+  width: 80%;
+}
 
+#content #add_index form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#content #add_index input {
+  padding: 5px;
+  font-size: 12px;
+  width: 200px;
+}
+
+#content #add_index button {
+  background-color: rgba(138,92,245,255);
+  border: none;
+  color: white;
   font-family: Arial, serif;
+  font-size: 12px;
+  padding: 5px 20px;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* ==== SEARCH FORM ==== */
+#search {
+  width: 100%;
+  margin-bottom: 15px;
+  margin-left: 60px;
 }
 
 #search form {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-top: 20px;
-  padding-bottom: 0px;
+  flex-direction: column;
+  gap: 8px;
+  width: 65%;
+  padding: 10px;
+  background-color: rgba(30,30,30,255);
 }
+
+
+#search select {
+  background-color: rgba(50,50,50,255);
+  color: white;
+  border: 1px solid rgba(60,60,60,255);
+  padding: 5px;
+  border-radius: 3px;
+}
+
+#search input[type="text"] {
+  background-color: rgba(50,50,50,255);
+  color: white;
+  border: 1px solid rgba(60,60,60,255);
+  padding: 5px;
+  border-radius: 3px;
+}
+
 
 #search form button {
-  margin-left: auto;
-
   background-color: rgba(138,92,245,255);
   border: white;
-
   color: white;
   font-family: Arial, serif;
-
   font-size: 12px;
-
   padding: 3px 20px;
   border-radius: 4px;
-
-  display: block;
-  margin: 20px auto;
+  margin: 0;
+  align-self: flex-end;
+  margin-bottom: 5px;
 }
 
+/* ==== NOTES TABLE ==== */
+#index {
+  width: 100%;  /* Reduced width */
+}
 
+#content #index table {
+  width: 90%;
+  margin: 0;
+  font-family: Arial, serif;
+  border-collapse: collapse;
+  background-color: rgba(30,30,30,255);
+  color: white;
+}
 
-.sidebar
-{
+#content #index table th {
+  font-family: Arial, serif;
+  background-color: rgba(50,50,50,255);
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid rgba(70,70,70,255);
+  border-right: 2px solid rgba(70,70,70,255);
+}
+
+#content #index table th:last-child {
+  border-right: none;
+}
+#content #index table td {
+  font-family: Arial, serif;
+  padding: 8px;
+  border-bottom: 2px solid rgba(70,70,70,255);
+  border-right: 2px solid rgba(70,70,70,255);
+}
+
+#content #index table td:last-child {
+  border-right: none;
+}
+
+#content #index table tr:nth-child(even) {
+  background-color: rgba(50,50,50,255);
+}
+
+#content #index table tr:hover {
+  background-color: rgba(15,15,15,255);
+}
+
+#content #index table a {
+  font-family: Arial, serif;
+  font-size: 16px;
+  color: white;
+  transition: font-size 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+#content #index a:hover {
+  font-size: 24px;
+}
+
+#content #index p {
+  font-family: Arial, Serif;
+  font-size: 24px;
+}
+
+/* ==== NOTE EDITING ==== */
+.note {
+  font-family: Arial, serif;
+  margin: auto 0;
+}
+
+.note h1 {
+  color: white;
+  text-align: center;
+  font-size: 32px;
+  border-bottom: 3px solid rgba(60,60,60,255);
+}
+
+.note form label {
+  font-size: 24px;
+  color: white;
+  display: block;
+  text-align: center;
+}
+
+.note form input {
+  display: block;
+  margin: 0 auto;
+  border: 2px white;
+  background-color: rgba(60,60,60,255);
+  color: white;
+  outline: none;
+  font-size: 20px;
+  width: 20%;
+  transition: width 0.5s ease-in-out;
+}
+
+.note form input:focus {
+  width: 40%;
+  border: 3px solid white;
+}
+
+.note form input#note_summary {
+  width: 20%;
+  height: 80px;
+}
+
+.note form textarea#note_summary {
+  border: 2px solid white;
+  background-color: rgba(25,25,25,255);
+  outline: none;
+  width: 20%;
+  height: 60px;
+  resize: none;
+  overflow-y: auto;
+  color: white;
+  display: block;
+  margin: 0 auto;
+}
+
+.note form textarea {
+  border: 2px solid white;
+  background-color: rgba(25,25,25,255);
+  outline: none;
+  width: 30%;
+  height: 200px;
+  resize: none;
+  overflow-y: auto;
+  color: white;
+  display: block;
+  margin: 0 auto;
+}
+
+#content #note #note_summary {
+  text-align: center;
+  color: white;
+  width: 100%;
+  height: 100px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  resize: vertical;
+}
+
+#content .note {
+  color: white;
+  text-align: center;
+}
+
+#content .summary-content {
+  background-color: rgba(25,25,25,255);
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#content .rendered-content {
+  background-color: rgba(25,25,25,255);
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#content .rendered-content a {
+  color: rgba(138,92,245,255);
+  outline: none;
+}
+
+/* ==== SIDEBAR NAVIGATION ==== */
+.sidebar {
   top: 116px;
   width: 250px;
   height: 100vh;
@@ -290,84 +431,117 @@ body
   z-index: 1000;
 }
 
-.sidebar:hover
-{
+.sidebar:hover {
   left: 0;
 }
 
-.sidebar:hover + #content
-{
+.sidebar:hover + #content {
   margin-left: 270px;
 }
 
-.sidebar ul
-{
+.sidebar ul {
   position: relative;
   bottom: 150px;
   list-style: none;
-
   padding: 0;
   margin: 0;
 }
 
-.sidebar ul li
-{
+.sidebar ul li {
   padding-bottom: 5px;
-
   text-align: center;
-
   transition: font-size 0.5s ease-in-out;
   font-size: 16px;
 }
 
-.sidebar ul li a
-{
+.sidebar ul li a {
   color: white;
   text-decoration: none;
   display: block;
 }
 
-.sidebar ul li:hover
-{
+.sidebar ul li:hover {
   background: rgba(138,92,245,255);
   font-size: 20px;
 }
 
-
 .sidebar .indicator-left p,
-.sidebar .indicator-right p
-{
+.sidebar .indicator-right p {
   position: relative;
   color: white;
   left: 215px;
-
   font-size: 30px;
   text-align: left;
   font-family: Calibri, serif;
 }
 
-.sidebar .indicator-left p
-{
+.sidebar .indicator-left p {
   bottom: 97px;
   opacity: 0;
   z-index: 10;
 }
 
-.sidebar .indicator-right p
-{
+.sidebar .indicator-right p {
   bottom: 30px;
 }
 
-.sidebar:hover .indicator-right p
-{
+.sidebar:hover .indicator-right p {
   opacity: 0;
 }
 
-.sidebar:hover .indicator-left p
-{
+.sidebar:hover .indicator-left p {
   opacity: 1;
   z-index: 1000;
 }
 
+/* ==== MARKDOWN STYLING ==== */
+.markdown-content {
+  text-align: left;
+  font-family: Arial, serif;
+  color: white;
+  line-height: 1.6;
+  width: 40%;  /* Control width of content area */
+  margin: 0 auto;  /* Center the container */
+  background-color: rgba(30,30,30,255);  /* Match your dark theme */
+  padding: 20px;  /* Add some padding around content */
+  border-radius: 4px;  /* Optional: rounded corners */
+}
 
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin: 0;
+  color: white;
+  padding-bottom: 0;
 
+}
+
+.markdown-content ul.markdown-list {
+  margin: 0;
+  padding-left: 2em;
+  list-style-type: disc;
+}
+
+.markdown-content ul.markdown-list li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add styling for code blocks and inline code */
+.markdown-content pre {
+  background-color: rgba(25,25,25,255);
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.markdown-content code {
+  font-family: 'Consolas', monospace;
+  background-color: rgba(25,25,25,255);
+  padding: 2px 4px;
+  border-radius: 3px;
+}

@@ -26,15 +26,19 @@ public class ViewNoteServlet extends HttpServlet
             int note_ID = Integer.parseInt(request.getParameter("id"));
             Model model = ModelFactory.getModel();
 
-            if (request.getParameter("error") != null  && request.getParameter("error").equals("duplicate"))
-            {
-                request.setAttribute("error_message", "Note title cannot be the same as other notes within the same index");
-            }
-
+            handleErrorMessage(request, response);
             if (model.noteExists(note_ID))
             {
                 Note note = model.getNote(note_ID);
                 request.setAttribute("note", note);
+
+                String mode = request.getParameter("mode");
+                if ("view".equals(mode))
+                {
+                    String renderedContent = model.renderNoteText(note.getTextContents());
+                    request.setAttribute("renderedContent", renderedContent);
+                }
+
                 RequestDispatcher dispatch = request.getRequestDispatcher("/note.jsp");
                 dispatch.forward(request, response);
                 return;
@@ -49,5 +53,13 @@ public class ViewNoteServlet extends HttpServlet
         request.setAttribute("note_ID", request.getParameter("id"));
         RequestDispatcher dispatch = request.getRequestDispatcher("/note_doesnt_exist.jsp");
         dispatch.forward(request, response);
+    }
+
+    private void handleErrorMessage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        if (request.getParameter("error") != null  && request.getParameter("error").equals("duplicate"))
+        {
+            request.setAttribute("error_message", "Note title cannot be the same as other notes within the same index");
+        }
     }
 }

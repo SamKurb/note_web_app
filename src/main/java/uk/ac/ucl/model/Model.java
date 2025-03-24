@@ -19,6 +19,10 @@ public class Model
     this.noteManager = new NoteManager(indexManager);
     this.searchEngine = new SearchEngine();
     this.noteSorter = new NoteSorter();
+
+    JsonDataLoader loader = new JsonDataLoader(indexManager, noteManager);
+    boolean loaded = loader.loadData();
+
   }
 
   public void saveAllData()
@@ -41,6 +45,11 @@ public class Model
   public Note newNote(int categoryID)
   {
     return noteManager.createNote(categoryID);
+  }
+
+  public Index newIndex(String name, int parentID)
+  {
+    return indexManager.createIndex(name, parentID);
   }
 
   public ArrayList<Note> resolveNoteQuery(String searchString, String sortedBy,
@@ -76,6 +85,31 @@ public class Model
   public boolean noteExists(int ID)
   {
     return noteManager.noteExists(ID);
+  }
+
+
+
+  public ArrayList<Index> getChildIndices(int indexID)
+  {
+    ArrayList<Index> childIndices = new ArrayList<>();
+
+    Index index = indexManager.getIndexByID(indexID);
+    ArrayList<Integer> childIndexIDs = index.getChildIndices();
+    for (int ID : childIndexIDs)
+    {
+      childIndices.add(indexManager.getIndexByID(ID));
+    }
+    return childIndices;
+  }
+
+  public String renderNoteText(String text)
+  {
+    return TextRenderer.renderText(text);
+  }
+
+  public IndexManager getIndexManager()
+  {
+    return indexManager;
   }
 
 }

@@ -1,8 +1,8 @@
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\main\Main.java
-D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\HyperLinkElement.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\ImageElement.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\Index.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\IndexManager.java
+D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\JsonDataLoader.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\JsonDataSaver.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\Model.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\ModelFactory.java
@@ -13,10 +13,13 @@ D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\NoteSorter.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\SearchEngine.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\StringComparer.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\TextElement.java
+D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\model\TextRenderer.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\DeleteNoteServlet.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\IndexSearchServlet.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\MainPageServlet.java
+D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\NewIndexServlet.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\NewNoteServlet.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\SaveDataServlet.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\SaveNoteServlet.java
+D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\ToggleViewModeServlet.java
 D:\Uni\oop_cw\java_cw\src\main\java\uk\ac\ucl\servlets\ViewNoteServlet.java
