@@ -1,1 +1,1 @@
-Example Java web application for COMP0004
+cooked this up in a couple days, I am NOT proud of this code please don't hold it against me😭
